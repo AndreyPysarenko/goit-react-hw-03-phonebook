@@ -1,10 +1,9 @@
 import { Component } from 'react';
-import css from './app.module.css';
 import ContactForm from './ContactForm';
 import Filter from './Filter';
 import ContactList from './ContactList';
 import { nanoid } from 'nanoid';
-
+import { Container } from './App.styled';
 export class App extends Component {
   state = {
     contacts: [
@@ -15,6 +14,18 @@ export class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const localData = localStorage.getItem('contacts');
+    if (localData && JSON.parse(localData).length) {
+      this.setState({ contacts: JSON.parse(localData) });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length)
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  }
 
   createNewContact = dataByForm => {
     const isAlreadyExist = this.state.contacts.find(
@@ -45,14 +56,14 @@ export class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
-    const normalizedFilter = this.state.filter.toLowerCase();
-    const filterContacts = this.state.contacts.filter(contact =>
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    const filterContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
 
     return (
-      <div className={css.container}>
+      <Container>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.createNewContact} />
 
@@ -62,7 +73,7 @@ export class App extends Component {
           contacts={filterContacts}
           handleDelete={this.handleDelete}
         />
-      </div>
+      </Container>
     );
   }
 }

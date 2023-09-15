@@ -1,22 +1,18 @@
-import css from '../app.module.css';
-import itemCss from './contactListItem.module.css';
+import { Button } from 'components/App.styled';
+import { ListItemStyled, ListItemTextStyled } from './contactListItem.styled';
 
 const ContactListItem = ({ contacts, handleDelete }) => {
   return (
     <>
-      <li className={itemCss.listItem}>
-        <p className={itemCss.listItemText}>
+      <ListItemStyled>
+        <ListItemTextStyled>
           {contacts.name}: {contacts.number}
-        </p>
+        </ListItemTextStyled>
 
-        <button
-          className={css.btn}
-          type="button"
-          onClick={() => handleDelete(contacts.id)}
-        >
+        <Button type="button" onClick={() => handleDelete(contacts.id)}>
           Delete
-        </button>
-      </li>
+        </Button>
+      </ListItemStyled>
     </>
   );
 };

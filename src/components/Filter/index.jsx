@@ -1,17 +1,16 @@
-import css from './filter.module.css';
+import { ContainerFilterStyled, InputFilterStyled } from './filter.styled';
 
 const Filter = ({ filter, onChange }) => {
   return (
-    <div className={css.label}>
+    <ContainerFilterStyled>
       <label>Find contacts my name</label>
-      <input
-      className={css.input}
+      <InputFilterStyled
         name="title"
         type="text"
         value={filter}
-        onChange={onChange}        
+        onChange={onChange}
       />
-    </div>
+    </ContainerFilterStyled>
   );
 };
 

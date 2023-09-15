@@ -1,7 +1,9 @@
 import { Component } from 'react';
-
-import css from './contactForm.module.css';
-import btnCss from '../app.module.css';
+import { Button } from 'components/App.styled';
+import {
+  ContactFromStyled,
+  InputContactFromStyled,
+} from './contactForm.styled';
 
 class ContactForm extends Component {
   state = {
@@ -21,9 +23,9 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <form className={css.form} onSubmit={this.handleFormSubmit}>
+      <ContactFromStyled onSubmit={this.handleFormSubmit}>
         <label>Name</label>
-        <input
+        <InputContactFromStyled
           type="text"
           name="name"
           onChange={this.handleChange}
@@ -34,7 +36,7 @@ class ContactForm extends Component {
         />
 
         <label>Number</label>
-        <input
+        <InputContactFromStyled
           type="tel"
           name="number"
           onChange={this.handleChange}
@@ -43,10 +45,8 @@ class ContactForm extends Component {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button className={btnCss.btn} type="submit">
-          Add contact
-        </button>
-      </form>
+        <Button type="submit">Add contact</Button>
+      </ContactFromStyled>
     );
   }
 }

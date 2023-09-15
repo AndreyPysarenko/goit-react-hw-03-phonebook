@@ -1,10 +1,10 @@
 import ContactListItem from 'components/ContactListItem';
-import css from './contactList.module.css';
+import { ListStyled } from './contactList.styled';
 
 const ContactList = ({ contacts, handleDelete }) => {
   return (
-    <div>
-      <ul className={css.list}>
+    <>
+      <ListStyled>
         {contacts.map(contact => (
           <ContactListItem
             contacts={contact}
@@ -12,8 +12,8 @@ const ContactList = ({ contacts, handleDelete }) => {
             handleDelete={handleDelete}
           />
         ))}
-      </ul>
-    </div>
+      </ListStyled>
+    </>
   );
 };
 
